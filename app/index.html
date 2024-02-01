@@ -23,11 +23,31 @@
       <input
         type="text"
         placeholder="Search GitHub username..."
-        class="searchInput"
+        id="searchInput"
       />
-      <button>Search</button>
+      <button id="searchButton">Search</button>
     </section>
 
     <!-- search result card -->
+    <section>
+      <h1></h1>
+    </section>
+
+    <!-- scripts -->
+    <script>
+      fetch("https://api.github.com/users/octocat")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("data:", data);
+          console.log("name:", data.name);
+          const name = document.createElement("h1");
+          name.textContent = data.name;
+        })
+        .catch((error) => console.log(error));
+    </script>
+
+    <script src="js/search-result.js"></script>
   </body>
 </html>
