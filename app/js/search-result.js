@@ -1,19 +1,13 @@
 // search feature
-// select the search input by id
-const searchInput = document.getElementById("searchInput");
-// select seach button by id
-const searchButton = document.getElementById("searchButton");
-// declare the input value
-const inputValue = searchInput.value;
-// function to get input value and print it to the console
-function getInputVal() {
-  console.log("inputValue:", inputValue);
-}
-// add on click event listener to search button
-searchButton.addEventListener("click", getInputVal);
 
 function fetchUser(user) {
-  fetch(`https://api.github.com/users/${searchInput}`)
+  // 1. need to capture the input value
+  // select the search input by id
+  const searchInput = document.getElementById("searchInput");
+  // declare the input value
+  let inputValue = searchInput.value;
+  // 2. need to fetch the user (if they exist) from GitHub API
+  fetch(`https://api.github.com/users/${inputValue}`)
     .then((res) => {
       return res.json();
     })
@@ -22,5 +16,10 @@ function fetchUser(user) {
     })
     .catch((error) => console.log(error));
 }
+
+// select seach button by id
+const searchButton = document.getElementById("searchButton");
+// add on click event listener to search button
+searchButton.addEventListener("click", fetchUser);
 
 // update search result card
